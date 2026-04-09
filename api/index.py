@@ -20,9 +20,13 @@ class output_outgoing(BaseModel):
     result: float
     
 
+@app.get("/")
+def root():
+    return {"message": "online the server is working"}
+
 @app.get("/api/online")
 def online():
-    return {"message": "online"}
+    return {"message": "online the server is working"}
 
 
 #
