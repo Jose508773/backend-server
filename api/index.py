@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException      # FastAPI = the framework; HTTPException for error responses
 from fastapi.middleware.cors import CORSMiddleware  # needed so browsers on other domains can call us
 from pydantic import BaseModel 
+from fastapi import Request, Response
 
 app = FastAPI()
 
@@ -29,9 +30,13 @@ def online():
     return {"message": "online the server is working hello howdy whats your name"}
 
 
-#
-#@app.post("/api/add", response_model=output_outgoing)
-#def take_input(request: Request, response: Response):
+@app.post("/api/add", response_model=output_outgoing)
+async def take_input(request: Request, response: Response):
+    data = await request.json()
+    a = data.get("a")
+    b = data.get("b")
+    result = a + b
+    return {"result": result}
 
 
 
